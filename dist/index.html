@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="TechShot Studio — подготовка и генерация фотографий техники по модели.">
-<title>TechShot Studio — генерации техники</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="preview.css"><link rel="stylesheet" href="real-output.css"><link rel="stylesheet" href="author.css">
+<title>TechShot Studio — генерации техники</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="preview.css"><link rel="stylesheet" href="real-output.css"><link rel="stylesheet" href="author.css"><link rel="stylesheet" href="search.css">
 </head>
 <body>
 <div class="app-shell">
@@ -32,8 +32,10 @@
     <div class="control-card source-card">
       <div class="card-head"><div><span class="section-kicker">01 / SOURCE</span><h2>Найдите модель техники</h2></div><span class="card-number">A</span></div>
       <div class="search-row"><div class="search-field"><span>⌕</span><input id="modelInput" value="Sharmax Atlas 1000 LX" aria-label="Название модели техники"><button id="clearModel" aria-label="Очистить">×</button></div><button class="primary-button" id="searchButton"><span>Найти референсы</span><b>↗</b></button></div>
-      <div class="source-toolbar"><span>Референсы модели</span><span class="source-pending">Парсер источников ещё не подключён</span></div>
-      <div class="reference-empty" id="referenceList"><span>⌕</span><div><strong>Здесь появятся реальные фотографии модели</strong><small>Только после поиска по подключённым источникам или загрузки исходников.</small></div></div>
+      <div class="search-engine-row"><span>Искать в</span><div class="search-engines" role="group" aria-label="Поисковая система"><button class="search-engine selected" data-search-engine="both" type="button">Google + Яндекс</button><button class="search-engine" data-search-engine="google" type="button">Google</button><button class="search-engine" data-search-engine="yandex" type="button">Яндекс Картинки</button></div></div>
+      <div class="source-toolbar"><span>Референсы модели</span><div class="source-filters" role="group" aria-label="Тип источника"><button class="source-filter selected" data-source-filter="all" type="button">Все</button><button class="source-filter" data-source-filter="manufacturer" type="button">Производитель</button><button class="source-filter" data-source-filter="stores" type="button">Магазины</button><button class="source-filter" data-source-filter="media" type="button">Медиа</button></div><span class="source-pending" id="parserStatus">Поиск источников</span></div>
+      <div class="reference-upload-row"><label class="reference-upload-button" for="referencePhotos">＋ Добавить фото модели<input id="referencePhotos" type="file" accept="image/*" multiple hidden></label><small id="referenceCount">Для точной модели добавь 1–4 исходных фото</small></div>
+      <div class="reference-empty" id="referenceList"><span>⌕</span><div><strong>Здесь появятся реальные фотографии модели</strong><small>Поиск покажет ссылку на исходный сайт и только реальные найденные изображения.</small></div></div>
       <div class="source-result" id="sourceResult"><span class="pulse-dot"></span><strong>Важно:</strong> сервис не подменяет технику рисунками или чужими моделями.</div>
     </div>
     <div class="control-card scenario-card">
