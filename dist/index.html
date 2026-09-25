@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TechShot Studio — подготовка и генерация фотографий техники по модели.">
+<title>TechShot Studio — генерации техники</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="preview.css"><link rel="stylesheet" href="real-output.css"><link rel="stylesheet" href="author.css">
+</head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+  <div class="brand-block"><div class="brand-mark"><span></span><span></span><span></span></div><div><div class="brand-name">TECHSHOT</div><div class="brand-caption">STUDIO / 01</div></div></div>
+  <div class="workspace-switcher"><span class="status-dot"></span><div><strong>Globaldrive</strong><small>Рабочее пространство</small></div><span class="chevron">⌄</span></div>
+  <nav class="main-nav" aria-label="Основная навигация">
+    <button class="nav-item active" data-scroll="workspace"><span class="nav-icon">✦</span>Новый проект</button>
+    <button class="nav-item" data-scroll="projects"><span class="nav-icon">▦</span>Мои проекты <span class="nav-count">08</span></button>
+    <button class="nav-item" data-scroll="integration"><span class="nav-icon">⌘</span>Встраивание</button>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="quality-mini"><div class="quality-mini-head"><span>Контроль качества</span><span class="mini-check">✓</span></div><div class="quality-bar"><span></span></div><small>Профиль «Каталог техники»</small></div>
+    <div class="user-chip"><span class="avatar">МК</span><span><strong>MistaCat</strong><small>Администратор</small></span><span class="more">•••</span></div>
+  </div>
+</aside>
+<main class="main-content" id="workspace">
+  <header class="help-strip"><button class="help-button" id="authorHelp" type="button" aria-label="Об авторе" aria-haspopup="dialog">?</button></header>
+  <section class="page-intro"><div><div class="eyebrow">IMAGE PRODUCTION WORKSPACE</div><h1>Соберите пакет<br><em>безупречных ракурсов</em></h1><p>Найдите технику по названию, задайте обязательные проверки — сервис выдаст каждый кадр отдельно, без коллажа.</p></div><div class="project-id">PROJECT <strong>TS–0248</strong></div></section>
+  <div class="stepper" aria-label="Этапы проекта">
+    <div class="step active"><span>01</span><div><strong>Источник</strong><small>Модель и референсы</small></div></div><div class="step-line"></div>
+    <div class="step"><span>02</span><div><strong>Сценарий</strong><small>Ракурсы и сцена</small></div></div><div class="step-line"></div>
+    <div class="step"><span>03</span><div><strong>Результат</strong><small>Проверка и экспорт</small></div></div>
+  </div>
+  <section class="studio-grid">
+    <div class="control-card source-card">
+      <div class="card-head"><div><span class="section-kicker">01 / SOURCE</span><h2>Найдите модель техники</h2></div><span class="card-number">A</span></div>
+      <div class="search-row"><div class="search-field"><span>⌕</span><input id="modelInput" value="Sharmax Atlas 1000 LX" aria-label="Название модели техники"><button id="clearModel" aria-label="Очистить">×</button></div><button class="primary-button" id="searchButton"><span>Найти референсы</span><b>↗</b></button></div>
+      <div class="source-toolbar"><span>Референсы модели</span><span class="source-pending">Парсер источников ещё не подключён</span></div>
+      <div class="reference-empty" id="referenceList"><span>⌕</span><div><strong>Здесь появятся реальные фотографии модели</strong><small>Только после поиска по подключённым источникам или загрузки исходников.</small></div></div>
+      <div class="source-result" id="sourceResult"><span class="pulse-dot"></span><strong>Важно:</strong> сервис не подменяет технику рисунками или чужими моделями.</div>
+    </div>
+    <div class="control-card scenario-card">
+      <div class="card-head"><div><span class="section-kicker">02 / SCENARIO</span><h2>Что создаём</h2></div><span class="card-number">B</span></div>
+      <div class="scenario-options">
+        <button class="scenario-option selected" data-scenario="studio"><span class="scenario-icon">◌</span><span><strong>Каталог / студия</strong><small>4 ракурса на чистом белом фоне</small></span><i>✓</i></button>
+        <button class="scenario-option" data-scenario="details"><span class="scenario-icon">⊙</span><span><strong>Крупные узлы</strong><small>Колёса, подвеска, фары и детали</small></span><i>✓</i></button>
+        <button class="scenario-option" data-scenario="nature"><span class="scenario-icon">⌁</span><span><strong>Техника в природе</strong><small>4–5 сцен с естественным окружением</small></span><i>✓</i></button>
+      </div>
+      <div class="scene-count"><span>Количество кадров</span><div class="count-control"><button id="decreaseCount">−</button><strong id="sceneCount">4</strong><button id="increaseCount">+</button></div></div>
+      <div class="scene-note"><span>i</span><p>Каждый результат будет отдельным файлом. Коллажи не используются.</p></div>
+    </div>
+    <div class="control-card angles-card">
+      <div class="card-head"><div><span class="section-kicker">03 / ANGLES</span><h2>Обязательные ракурсы</h2></div><button class="text-button" id="resetAngles">Сбросить</button></div>
+      <div class="angle-grid">
+        <label class="angle-toggle checked"><input type="checkbox" checked data-angle="front-left"><span class="angle-visual angle-front-left"></span><strong>Передний левый</strong><small>3/4 front</small><b>✓</b></label>
+        <label class="angle-toggle checked"><input type="checkbox" checked data-angle="side"><span class="angle-visual angle-side"></span><strong>Профиль</strong><small>side</small><b>✓</b></label>
+        <label class="angle-toggle checked"><input type="checkbox" checked data-angle="rear-right"><span class="angle-visual angle-rear-right"></span><strong>Задний правый</strong><small>3/4 rear</small><b>✓</b></label>
+        <label class="angle-toggle checked"><input type="checkbox" checked data-angle="rear"><span class="angle-visual angle-rear"></span><strong>Сзади</strong><small>rear</small><b>✓</b></label>
+      </div>
+      <div class="requirement-row"><div><strong>Не обрезать технику</strong><small>Колёса, зеркала и края корпуса целиком</small></div><button class="switch on" data-toggle="crop"><span></span></button></div>
+      <div class="requirement-row"><div><strong>Сохранить заводские детали</strong><small>Геометрия, фары, подвеска и логотипы</small></div><button class="switch on" data-toggle="details"><span></span></button></div>
+    </div>
+    <div class="control-card quality-card">
+      <div class="card-head"><div><span class="section-kicker">04 / QUALITY GATE</span><h2>Защита от дефектов</h2></div><span class="shield">♢</span></div>
+      <div class="quality-hero"><div class="quality-ring"><span>QC</span></div><div><strong>Профиль включён</strong><p>Автоматическая проверка перед выдачей файлов</p></div></div>
+      <div class="check-list"><div class="check-row"><span>✓</span><div><strong>Целые колёса и корпус</strong><small>Без обрезанных краёв и «плавления» формы</small></div></div><div class="check-row"><span>✓</span><div><strong>Без артефактов генерации</strong><small>Фары, спицы, протектор, подвеска</small></div></div><div class="check-row"><span>✓</span><div><strong>Единая модель во всех кадрах</strong><small>Цвет, комплектация, маркировка</small></div></div></div>
+      <div class="quality-footer"><span>Порог приёмки</span><strong>98 / 100</strong></div>
+    </div>
+  </section>
+  <section class="generate-bar"><div class="generate-summary"><span class="summary-icon">✦</span><div><strong id="generateSummary">4 кадра · каталог на белом фоне</strong><small>Оценка: 4–6 минут · проверка качества включена</small></div></div><button class="generate-button" id="generateButton"><span>Сгенерировать пакет</span><b>→</b></button></section>
+  <section class="results-section" id="projects">
+    <div class="section-heading"><div><span class="section-kicker">OUTPUT</span><h2>Фотографии проекта</h2></div><div class="result-actions"><span class="ready-label"><i></i><span id="resultStatus">Нет готовых фотографий</span></span><button class="secondary-button" id="downloadAll" disabled>⇩ Скачать архив</button></div></div>
+    <div class="result-grid" id="resultGrid">
+      <div class="empty-results" id="emptyResults"><div class="empty-results-icon">▧</div><h3>Пока нет фотографий техники</h3><p>Здесь будут только реальные результаты парсинга, загрузки или генерации — без рисунков, чужих моделей и фальшивых превью.</p><label class="upload-real-button" for="realPhotos">＋ Добавить реальные фото для просмотра</label><input id="realPhotos" type="file" accept="image/*" multiple hidden><small>Файлы остаются в браузере до подключения хранилища.</small></div>
+    </div>
+  </section>
+  <section class="integration-section" id="integration">
+    <div class="integration-copy"><span class="section-kicker">EMBED READY</span><h2>Встройте генератор<br>в свой сайт</h2><p>Оставьте интерфейс внутри TechShot или подключите его как отдельный модуль через iframe/API. Настройки качества передаются в запросе.</p><div class="embed-pills"><span>iframe</span><span>REST API</span><span>webhook</span></div></div>
+    <div class="code-card"><div class="code-head"><span><i></i><i></i><i></i></span><small>embed.html</small><button id="copyEmbed">Копировать</button></div><pre><code>&lt;iframe
+  src="https://techshot-studio.mistacat.chatgpt.site/embed"
+  data-profile="catalog-tech"
+  data-output="separate-files"
+  allow="downloads"
+&gt;&lt;/iframe&gt;</code></pre><div class="code-foot"><span class="pulse-dot"></span> Профиль качества и отдельная выдача включены</div></div>
+  </section>
+  <footer class="footer"><span>TECHSHOT STUDIO · v0.1 prototype</span><span>Ваша модель — ваши исходники — ваш контроль</span></footer>
+</main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="author-modal" id="authorModal" aria-hidden="true">
+  <div class="author-backdrop" data-close-author></div>
+  <section class="author-dialog" role="dialog" aria-modal="true" aria-labelledby="authorTitle">
+    <button class="author-close" type="button" data-close-author aria-label="Закрыть">×</button>
+    <span class="section-kicker">TECHSHOT STUDIO</span>
+    <h2 id="authorTitle">Автор: Mista Cat</h2>
+    <p>ЕвГений, не миллионер, не плейбой, но филантроп и музыкант</p>
+  </section>
+</div>
+<div class="preview-modal" id="previewModal" aria-hidden="true">
+  <div class="preview-backdrop" data-close-preview></div>
+  <section class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+    <header class="preview-dialog-head"><div><span class="section-kicker">IMAGE PREVIEW</span><h2 id="previewTitle">front-left.webp</h2></div><button class="preview-close" type="button" data-close-preview aria-label="Закрыть просмотр">×</button></header>
+    <div class="preview-stage"><img id="previewImage" alt="Увеличенный просмотр результата"><div class="preview-stage-hint">Потяните ползунок, чтобы приблизить</div></div>
+    <div class="preview-toolbar"><button id="zoomOut" type="button">−</button><input id="zoomRange" type="range" min="1" max="4" step="0.1" value="1" aria-label="Масштаб"><button id="zoomIn" type="button">+</button><strong id="zoomValue">100%</strong><button id="fitZoom" type="button">Вписать</button><button id="modalDownload" class="modal-download" type="button">⇩ Скачать этот кадр</button></div>
+    <div class="preview-details"><div><span>Разрешение</span><strong id="previewResolution">2048 × 1536 px</strong></div><div><span>Размер</span><strong id="previewSize">2.4 MB</strong></div><div><span>Проверка</span><strong class="passed" id="previewQuality">QC 98/100 · пройдено</strong></div><div><span>Файл</span><strong id="previewFilename">front-left.webp</strong></div></div>
+  </section>
+</div>
+<script src="app.js"></script>
+<script src="preview.js"></script>
+<script src="author.js"></script>
+</body>
+</html>
