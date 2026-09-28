@@ -26,7 +26,7 @@ function parseGlobaldriveGallery(html,pageUrl,query){
   return {title,images};
 }
 async function fetchGlobaldriveGallery(pageUrl,query){
-  const response=await fetch(pageUrl,{signal:AbortSignal.timeout(7000),headers:{'User-Agent':'Mozilla/5.0 (compatible; TechShotStudio/1.0)','Accept':'text/html,application/xhtml+xml','Accept-Language':'ru-RU,ru;q=0.9'}});
+  const response=await fetch(pageUrl,{signal:AbortSignal.timeout(18000),headers:{'User-Agent':'Mozilla/5.0 (compatible; TechShotStudio/1.0)','Accept':'text/html,application/xhtml+xml','Accept-Language':'ru-RU,ru;q=0.9'}});
   if(!response.ok)throw new Error(`Globaldrive не открыл карточку (HTTP ${response.status}).`);
   const parsed=parseGlobaldriveGallery(await response.text(),pageUrl,query);
   if(!parsed.images.length)throw new Error('В карточке Globaldrive не найдена фотогалерея.');
