@@ -7,10 +7,15 @@ function decodeXml(value){return String(value||'').replace(/<!\[CDATA\[([\s\S]*?
 function xmlTag(xml,tag){const match=String(xml).match(new RegExp(`<${tag}(?:\\s[^>]*)?>([\\s\\S]*?)</${tag}>`,'i'));return match?decodeXml(match[1].replace(/<[^>]*>/g,' ')):''}
 function yandexImageSearchUrl(query){return `https://yandex.ru/images/search?text=${encodeURIComponent(query)}`}
 function providerError(payload,status,fallback){
-  if(typeof payload==='string'&&payload.trim())return payload.trim();
+  if(typeof payload==='string'&&payload.trim()){
+    if(/permissiondenied|permission to \\[resource-manager/i.test(payload))return 'Яндекс Картинки: API-ключ не имеет доступа к выбранному каталогу. Создай новый ключ в AI Studio в этом каталоге или выдай его сервисному аккаунту роль search-api.webSearch.user.';
+    return payload.trim();
+  }
   const details=payload?.details||payload?.error?.details;
   const detailText=Array.isArray(details)?details.map(item=>item?.message||item?.detail||'').filter(Boolean).join(' '):'';
-  return payload?.message||payload?.error?.message||payload?.error_description||detailText||`${fallback} (HTTP ${status}).`;
+  const message=payload?.message||payload?.error?.message||payload?.error_description||detailText;
+  if(/permissiondenied|permission to \\[resource-manager/i.test(message||''))return 'Яндекс Картинки: API-ключ не имеет доступа к выбранному каталогу. Создай новый ключ в AI Studio в этом каталоге или выдай его сервисному аккаунту роль search-api.webSearch.user.';
+  return message||`${fallback} (HTTP ${status}).`;
 }
 async function searchGoogle(query){if(!process.env.SERPER_API_KEY)throw new Error('Google Images не настроен: добавь SERPER_API_KEY в Vercel.');const response=await fetch('https://google.serper.dev/images',{method:'POST',headers:{'X-API-KEY':process.env.SERPER_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({q:query,num:MAX_RESULTS,gl:'ru',hl:'ru',autocorrect:false})});const payload=await response.json().catch(()=>({}));if(!response.ok)throw new Error(payload?.message||payload?.error||'Google Images не ответил.');const seen=new Set();return (Array.isArray(payload.images)?payload.images:[]).map(item=>{const imageUrl=httpUrl(item.imageUrl||item.thumbnailUrl);const pageUrl=httpUrl(item.link||item.source||item.imageUrl);if(!imageUrl||!pageUrl||seen.has(imageUrl))return null;seen.add(imageUrl);return {imageUrl,pageUrl,title:clean(item.title,180)||query,domain:domain(pageUrl),engine:'google'}}).filter(Boolean)}
 function parseYandexImages(rawData,query){const xml=Buffer.from(String(rawData||''),'base64').toString('utf8');const blocks=xml.match(/<doc(?:\s[^>]*)?>[\s\S]*?<\/doc>/gi)||[];const seen=new Set();return blocks.map(block=>{const imageUrl=httpUrl(xmlTag(block,'url')||xmlTag(block,'original-url')||xmlTag(block,'img-url'));if(!imageUrl||seen.has(imageUrl))return null;seen.add(imageUrl);const sourceDomain=clean(xmlTag(block,'domain'),140)||domain(imageUrl);const title=clean(xmlTag(block,'title'),180)||query;return {imageUrl,pageUrl:yandexImageSearchUrl(query),title,domain:sourceDomain,engine:'yandex'}}).filter(Boolean)}
