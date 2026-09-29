@@ -4,14 +4,13 @@
 
 ## Что установить на ПК
 
-1. Установить ComfyUI для Windows и скачать SDXL checkpoint `sd_xl_base_1.0.safetensors` в `ComfyUI/models/checkpoints/`.
-2. Запустить ComfyUI в режиме низкой видеопамяти: `python main.py --listen 127.0.0.1 --lowvram`.
+1. В ComfyUI Desktop импортировать шаблон `Z-Image-Turbo: текст в изображение` и скачать его три модели: `qwen_3_4b.safetensors`, `z_image_turbo_bf16.safetensors`, `ae.safetensors`.
+2. Для RTX 4060 8 ГБ добавить в **Manage → Startup Args** параметр `--disable-pinned-memory`, затем перезапустить экземпляр.
 3. В отдельном PowerShell в этой папке выполнить:
 
 ```powershell
 $env:TECHSHOT_GENERATOR_TOKEN = 'длинный-случайный-секрет-минимум-24-символа'
 $env:COMFYUI_URL = 'http://127.0.0.1:8188'
-$env:TECHSHOT_CHECKPOINT = 'sd_xl_base_1.0.safetensors'
 node .\techshot-comfy-bridge.mjs
 ```
 
@@ -19,3 +18,5 @@ node .\techshot-comfy-bridge.mjs
 5. Опубликовать порт `3333` через защищённый Cloudflare Tunnel или Tailscale Funnel. URL туннеля записать в Vercel как `COMFY_BRIDGE_URL`, а тот же секрет — как `COMFY_BRIDGE_TOKEN`.
 
 Не открывайте сам ComfyUI в интернет: наружу публикуется только мост, который проверяет токен.
+
+Мост ставит кадр в очередь и сразу возвращает идентификатор задачи. TechShot сам опрашивает статус, поэтому Vercel не обрывает генерацию, которая дольше минуты.
