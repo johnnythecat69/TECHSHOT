@@ -1,8 +1,0 @@
-CREATE TABLE players (
-  user_id TEXT PRIMARY KEY NOT NULL,
-  name TEXT NOT NULL,
-  role TEXT NOT NULL,
-  appearance TEXT NOT NULL,
-  run TEXT NOT NULL,
-  revision INTEGER NOT NULL DEFAULT 0
-);
