@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111813">
+<title>Сердце чащи · Проклятая доска</title>
+<meta name="description" content="Брось кубик. Собери три печати. Переживи то, что разбудила доска.">
+<link rel="stylesheet" href="/game.css">
+<script type="module" src="/game.js"></script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><span class="mark">✦</span><span>СЕРДЦЕ ЧАЩИ<small>ПРОКЛЯТАЯ ДОСКА</small></span></a>
+  <span class="edition"><i></i> ОДИНОЧНАЯ ЭКСПЕДИЦИЯ</span>
+  <div class="top-actions"><button id="sound" class="quiet" aria-pressed="false">Звук выкл.</button><button id="help" class="quiet">Правила</button><a id="logout" class="quiet" href="/signout-with-chatgpt?return_to=%2F" target="_top" hidden>Выйти</a></div>
+</header>
+<main>
+  <div class="intro">
+    <div><p class="eyebrow"><span></span> ЭКСПЕДИЦИЯ 01 / ЗАПРЕТНЫЕ ЗЕМЛИ</p><h1>Сердце чащи</h1><p>Брось кубик. Собери три печати. Переживи то, что разбудила доска.</p></div>
+    <div class="intro-tag">◈ &nbsp; АРХИВ ЭКСПЕДИЦИЙ <b>№ 001</b></div>
+  </div>
+  <div class="game-layout">
+    <section class="stage" aria-label="Игровая доска">
+      <div id="viewport"></div>
+      <div class="scene-top"><div><i></i><span id="chapter">ДОСКА · ОЖИДАНИЕ</span></div><button id="camera" class="quiet">Вид сверху</button></div>
+      <div class="scene-bottom"><span id="scene-tip">Потяни, чтобы повернуть доску · колесо для приближения</span><span>◈ &nbsp; ПОЛЕ 01</span></div>
+      <div id="gate" class="gate"><div class="gate-card"><p class="eyebrow">ЧАЩА ЖДЁТ</p><h2>Доска проснулась</h2><p>Загружаем экспедицию…</p></div></div>
+    </section>
+    <aside class="rail">
+      <section class="card expedition" aria-labelledby="profile-title">
+        <p class="eyebrow"><span></span> ТВОЯ ЭКСПЕДИЦИЯ</p>
+        <div class="profile"><span id="portrait">◇</span><div><h2 id="profile-title">Путник</h2><p id="class-name">Персонаж ожидает создания</p></div></div>
+        <div class="meters">
+          <div><span>Жизни</span><b id="hp">—</b></div>
+          <div><span>Печати</span><b id="seals">— / 3</b></div>
+          <div><span>Клетка</span><b id="progress">— / 32</b></div>
+        </div>
+        <div class="track"><i id="fill"></i></div>
+        <div id="inventory" class="inventory">Талисманы —</div>
+      </section>
+      <section class="card action" aria-labelledby="action-title">
+        <p class="eyebrow"><span></span> СЛЕДУЮЩИЙ ХОД</p>
+        <div class="action-label"><h2 id="action-title">Кубик судьбы</h2><span id="die" aria-label="Последний бросок">⚄</span></div>
+        <p id="action-desc">Один бросок меняет всё.</p>
+        <button id="roll" class="gold" disabled>Бросить кубик <span>↗</span></button>
+        <button id="careful" class="quiet" hidden>Осторожный бросок · 1–3</button>
+        <p id="error" role="alert" hidden></p>
+      </section>
+      <section class="card journal" aria-labelledby="journal-title">
+        <p class="eyebrow"><span></span> ПОЛЕВЫЕ ЗАПИСИ</p>
+        <h2 id="journal-title">Журнал</h2>
+        <ol id="entries" aria-live="polite"><li>В темноте слышно, как шевелится дерево.</li></ol>
+      </section>
+    </aside>
+  </div>
+  <footer><span>СЕРДЦЕ ЧАЩИ <b>·</b> ЭКСПЕДИЦИЯ 01</span><span>«Доска помнит тех, кто бросал»</span></footer>
+</main>
+<dialog id="rules">
+  <button id="close-rules" class="quiet close" aria-label="Закрыть">×</button>
+  <p class="eyebrow">ПАМЯТКА ПУТНИКА</p><h2>Правила чащи</h2>
+  <ol><li>Бросай кубик и двигайся к центру. Шестёрка усложняет следующий обряд.</li><li>На клетках тебя ждут загадки, обряды на память, тайники, привалы и сделки с идолами.</li><li>В обряде запомни порядок рун. После исчезновения знаков нажми нужные руны на доске, под ней или клавишами 1–5.</li><li>Талисман даёт осторожный бросок от 1 до 3. Идол принимает печать за лечение и снятие проклятия.</li><li>Дойди до центра с тремя печатями и пройди финальный обряд. Если жизни закончатся, начни новую партию тем же героем.</li></ol>
+</dialog>
+</body>
+</html>
